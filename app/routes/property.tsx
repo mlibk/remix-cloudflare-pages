@@ -16,7 +16,13 @@ async function getData(token: string) {
 
   const response = await fetch(
     `https://www.rentalsystems.com/export/v1/properties/index?token=${token}&id=400699`,
-    { headers: { Accept: "application/json" } }
+    {
+      headers: { Accept: "application/json" },
+      cf: {
+        cacheTtl: 300,
+        cacheEverything: true,
+      },
+    }
   );
 
   return (await response.json()) as ApiResponse;
